@@ -3,6 +3,9 @@ import { FaUserCircle, FaHeart, FaCloud, FaRetweet } from 'react-icons/fa';
 import './Tweet.css';
 
 const Tweet = ({ username, content }) => {
+  const replacedContent = content.replace(/\n/g, '<br />'); // Replace newline characters with <br /> tags
+  const isHTMLContent = replacedContent.includes('<br />'); // Check if the content contains HTML tags
+
   return (
     <div className="tweet">
       <div className="profile-picture">
@@ -11,10 +14,14 @@ const Tweet = ({ username, content }) => {
       <div className="vertical-line"></div>
       <div className="tweet-content">
         <div className="username">{username}</div>
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        {isHTMLContent ? (
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: replacedContent }}
+          />
+        ) : (
+          <div className="content">{content}</div>
+        )}
         <div className="content-pic"></div>
         <div className="icons">
           <FaHeart className="heart-icon" />
