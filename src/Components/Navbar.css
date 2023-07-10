@@ -1,0 +1,68 @@
+.navbar-folded,
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100px;
+  background-color: transparent; /*change later*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-expanded {
+  width: 100px;
+}
+
+.navbar-folded {
+  width: 50px;
+}
+
+.navbar-button,
+.navbar-button-folded {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  width: 100%; /* Use width: 100% to make the buttons fill the container */
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px; /* Set border-radius to half of the button height for circular edges */
+  cursor: pointer;
+  text-align: center; /* Center the text horizontally */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-button:first-child,
+.navbar-button-folded:first-child {
+  margin-top: 10px;
+  margin-bottom: auto;
+}
+
+.navbar-button:last-child,
+.navbar-button-folded:last-child {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.navbar-button:hover,
+.navbar-button-folded:hover {
+  background-color: #ffffff1a;
+}
+
+.navbar-button svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.navbar-button-folded svg {
+  width: 24px;
+  height: 24px;
+}

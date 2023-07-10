@@ -1,0 +1,36 @@
+body {
+  background-color: black;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  margin-left: 100px; /* Adjust the margin to make space for the navbar */
+}
+
+.search-bar {
+  background-color: #e8e2e2;
+  padding: 10px;
+  display: flex;
+  color: black;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 100px; /* Adjust the margin to align with the navbar */
+}
+
+.tweets-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-left: 110px; /* Adjust the margin to align with the navbar */
+}

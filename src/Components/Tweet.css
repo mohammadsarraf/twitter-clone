@@ -1,0 +1,73 @@
+.tweet {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  margin-right: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-icon {
+  width: 100%;
+  height: 100%;
+  color: #aaa;
+}
+
+.tweet-content {
+  flex-grow: 1;
+}
+
+.username {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.content {
+  margin-top: 5px;
+}
+
+.heart-icon {
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.heart-icon:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.cloud-icon {
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.cloud-icon:hover{
+  color:rgb(52, 125, 215);
+  cursor: pointer;
+}
+
+.retweet-icon {
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.retweet-icon:hover {
+  color: green;
+  cursor: pointer;
+}
+/* .icon {
+  margin-left: 5px;
+  color: #aaa;
+} */
+

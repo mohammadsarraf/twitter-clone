@@ -1,0 +1,73 @@
+.search-bar-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #e8e2e2;
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 110px;
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.search-bar-folded {
+  display: flex;
+  align-items: center;
+  background-color: #e8e2e2;
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 70px;
+  margin-top: 20px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.add-icon {
+  color: white;
+  height: 30px;
+  width: 30px;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Add transition property for smooth hover effect */
+}
+
+.add-icon-button:hover {
+  background-color: #333333; /* Set the background color on hover */
+}
+
+.search-icon {
+  margin-right: 10px;
+  color: black;
+  font-size: 16px; /* Adjust the font size of the icons */
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  font-size: 16px;
+}
+
+.add-icon-button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content vertically */
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 10px; /* Adjust the padding around the button */
+  border-radius: 50%; /* Apply a border radius to make the button round */
+}
