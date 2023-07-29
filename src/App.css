@@ -8,7 +8,14 @@ body {
   color: white;
   font-family: Arial, sans-serif;
 }
+/* delete */
+.navbar-button svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
 
+/*  */
 .main-content {
   flex-grow: 1;
   background-color: black;

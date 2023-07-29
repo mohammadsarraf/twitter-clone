@@ -2,7 +2,7 @@ import React from 'react';
 import { RiMenuLine, RiHomeLine, RiContactsLine, RiUserLine } from 'react-icons/ri';
 import './Navbar.css'; // Import the CSS file for the component
 
-const Navbar = ({ isExpanded, onToggle }) => {
+const Navbar = ({ isExpanded, onToggle, onSignIn }) => {
   return (
     <div className={isExpanded ? ('navbar') : ('navbar-folded')}>
       <button className="navbar-button" onClick={onToggle}>
@@ -18,7 +18,7 @@ const Navbar = ({ isExpanded, onToggle }) => {
             <span><RiContactsLine /></span>
             Contact
           </button>
-          <button className="navbar-button">
+          <button className="navbar-button" onClick={onSignIn}>
             <span><RiUserLine /></span>
           </button>
         </>
@@ -30,7 +30,7 @@ const Navbar = ({ isExpanded, onToggle }) => {
           <button className="navbar-button-folded">
             <span><RiContactsLine /></span>
           </button>
-          <button className="navbar-button-folded">
+          <button className="navbar-button-folded" onClick={onSignIn}>
             <span><RiUserLine /></span>
           </button>
         </>

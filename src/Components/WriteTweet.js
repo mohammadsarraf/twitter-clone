@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { FaUserCircle, FaHeart, FaCloud, FaRetweet, FaPlus } from 'react-icons/fa';
+
 import './WriteTweet.css';
 
-const WriteTweet = ({ onAddTweet }) => {
+const WriteTweet = ({ onAddTweet, onCloseTweet }) => {
   const [username, setUsername] = useState('');
   const [content, setContent] = useState('');
+  const [profilePicture, setProfilePicture] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -21,15 +25,41 @@ const WriteTweet = ({ onAddTweet }) => {
 
   const handleSubmit = () => {
     if (username && content) {
-      onAddTweet(username, content);
+      onAddTweet(username, content, profilePicture);
       setUsername('');
       setContent('');
+      setProfilePicture(null);
     }
+  };
+
+  const handleClose = () => {
+    onCloseTweet();
+  }
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    setProfilePicture(file);
   };
 
   return (
     <div className="write-tweet-container">
-      <div className="profile-icon"></div>
+      <div className="profile-icon">
+        {profilePicture ? (
+          <img
+            src={URL.createObjectURL(profilePicture)}
+            alt="Profile Icon"
+            className="uploaded-profile-icon"
+          />
+        ) : (
+          <FaUserCircle className="default-profile-icon" />
+        )}
+      </div>
+      <button
+        className="add-icon"
+        onClick={() => fileInputRef.current.click()}
+      >
+        <FaPlus />
+      </button>
       <input
         type="text"
         placeholder="Username"
@@ -41,11 +71,21 @@ const WriteTweet = ({ onAddTweet }) => {
         placeholder="What's happening?"
         value={content}
         onChange={handleContentChange}
-        onKeyDown={handleKeyDown} // Add the keydown event handler
+        onKeyDown={handleKeyDown}
       />
       <button onClick={handleSubmit} className="tweet-button">
         Tweet
       </button>
+      <button className='tweet-button' onClick={handleClose}>
+        Close
+      </button>
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileUpload}
+      />
     </div>
   );
 };

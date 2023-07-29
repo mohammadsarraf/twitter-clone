@@ -17,6 +17,10 @@ const SearchBar = ({ isExpanded, onAddTweet }) => {
     setDisplayWriteTweet(false);
   };
 
+  const handleCloseTweet = () => {
+    setDisplayWriteTweet(false);
+  }
+
   return (
     <div className="search-bar-container">
       <div className={isExpanded ? 'search-bar' : 'search-bar-folded'}>
@@ -30,7 +34,7 @@ const SearchBar = ({ isExpanded, onAddTweet }) => {
       </button>
 
       {displayWriteTweet && (
-        <WriteTweet onAddTweet={handleAddTweetSubmit} /> // Pass the correct event handler
+        <WriteTweet onAddTweet={handleAddTweetSubmit} onCloseTweet={handleCloseTweet} /> // Pass the correct event handler
       )}
     </div>
   );
