@@ -3,58 +3,19 @@
 // import './App.css'
 // import LoginPage from './Components/LoginPage'
 // import Navbar from './Components/Navbar';
-
-// const Home = () => {
-//   return (
-//     <div className="App">
-//       <h1>Welcome To HomePage!</h1>
-//     </div>
-//   );
-// };
-
-// const About = () => {
-//   return (
-//     <div className="App">
-//       <h1>Welcome To AboutPage!</h1>
-//     </div>
-//   );
-// };
-
-// const User = () => {
-//   return (
-//     <div className="App">
-//       <h1>Welcome To UserPage!</h1>
-//     </div>
-//   );
-// };
+// import TweetBox from "./Components/TweetBox";
 
 // const App = () => {
 //   return (
-//     <Router>
-//       <div>
-//         <Navbar />
-//       </div>
+//     <div className="App">
+//       <TweetBox username={`MSTR2000`}content={`🔥Hot Take🔥
 
-//       <Routes>
-//         <Route path="/login" element={<LoginPage />}/>
-//       </Routes>
-//     </Router>
+// I love the standard Mail app in iOS. 
 
-    // <Router>
-    //   <div>
-    //     <div>
-    //       <h1><Link to="/home">Home</Link></h1>
-    //       <h1><Link to="/about">About</Link></h1>
-    //       <h1><Link to="/contact">User</Link></h1>        
-    //     </div>
+// It’s simple, clean, and minimal. It works. 
 
-    //     <Routes>
-    //       <Route path="/home" element={<Home />} />
-    //       <Route path="/about" element={<About />} />
-    //       <Route path="/contact" element={<LoginPage />} />
-    //     </Routes>
-    //   </div>
-    // </Router>
+// I’m afraid to ask… but why do so many people hate it?`}/>
+//     </div>
 //   );
 // };
 
@@ -65,11 +26,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Tweet from './Components/Tweet';
+import TweetBox from './Components/TweetBox';
 import SearchBar from './Components/SearchBar';
 import LoginPage from './Components/LoginPage'; // Import the SignInPage component
 //Firebase
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, doc, setDoc, addDoc, getDocs, serverTimestamp  } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'; // Import necessary components from React Router
 
@@ -178,9 +140,9 @@ const handleSignIn = async () => {
       const newTweet = {
         username,
         content,
-        timestamp: new Date().toISOString(), // Add a timestamp for the tweet
+        timestamp: serverTimestamp(), // Add a timestamp for the tweet
       };
-  
+      
       // Add the new tweet to the "tweets" collection
       const tweetRef = await addDoc(collection(db, "tweets"), newTweet);
   
@@ -215,14 +177,44 @@ const handleSignIn = async () => {
 
         <div className="tweets-container">
           {tweetsData.map((tweet) => {
-            return <Tweet key={tweet.tId} username={tweet.username} content={tweet.content} />;
+            const jsDate = (tweet.timestamp); // Convert the timestamp to a Date object
+            const timeAgo = calcTimeStamp(jsDate);
+            return <TweetBox key={tweet.tId} username={tweet.username} content={tweet.content} timeAgo={timeAgo} />;
           })}
         </div>
+
       </>
     </div>
     )
   }
 
+  const calcTimeStamp = (timestampString) => {
+    const timestamp = new Date(timestampString); // Convert the timestampString to a Date object
+    const now = new Date(); // Get the current Date object
+    const timeDifference = now - timestamp;
+  
+    
+    // Check for future timestamps
+    if (timeDifference < 0) {
+      return "In the future";
+    }
+    
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) {
+      return `${days} day${days === 1 ? '' : 's'} ago`;
+    } else if (hours > 0) {
+      return `${hours} h${hours === 1 ? '' : 's'} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} min${minutes === 1 ? '' : 's'} ago`;
+    } else {
+      return `${seconds} s${seconds === 1 ? '' : 's'} ago`;
+    }
+  };
+  
   return (
     <Router>
       <div className='App'>
@@ -233,26 +225,6 @@ const handleSignIn = async () => {
         </Routes>
       </div>
     </Router>
-    // <BrowserRouter>
-    //   <div className="App">
-    //     <>
-          // <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
-          // <SearchBar isExpanded={isExpanded} onAddTweet={addTweet} />
-
-          // <div className="tweets-container">
-          //   {tweetsData.map((tweet) => {
-          //     return <Tweet key={tweet.tId} username={tweet.username} content={tweet.content} />;
-          //   })}
-          // </div>
-    //     </>
-    //     <Routes>
-    //       <Route path="/" element={<></>} />
-    //       <Route path="/about" element={<div><h1>About Page</h1></div>} />
-    //       <Route path="/login" element={<LoginPage onSignIn={handleSignIn} onClose={() => setShowSignInPage(false)} />} />
-    //     </Routes>
-    //   </div>
-    // </BrowserRouter>
-    
   );
 };
 

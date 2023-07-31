@@ -8,20 +8,20 @@ body {
   color: white;
   font-family: Arial, sans-serif;
 }
-/* delete */
+
 .navbar-button svg {
   width: 20px;
   height: 20px;
   margin-right: 5px;
 }
 
-/*  */
 .main-content {
   flex-grow: 1;
   background-color: black;
   color: white;
   padding: 20px;
-  margin-left: 100px; /* Adjust the margin to make space for the navbar */
+  margin-left: 10%; /* Adjust the margin to make space for the navbar */
+  margin-right: 10%; /* Adjust the margin to make space for the navbar */
 }
 
 .search-bar {
@@ -31,7 +31,8 @@ body {
   color: black;
   align-items: center;
   justify-content: space-between;
-  margin-left: 100px; /* Adjust the margin to align with the navbar */
+  margin-left: 10%; /* Adjust the margin to align with the navbar */
+  margin-right: 10%; /* Adjust the margin to align with the navbar */
 }
 
 .tweets-container {
@@ -39,5 +40,6 @@ body {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  margin-left: 110px; /* Adjust the margin to align with the navbar */
+  margin-left: 20%; /* Adjust the margin to align with the navbar */
+  margin-right: 20%; /* Adjust the margin to align with the navbar */
 }

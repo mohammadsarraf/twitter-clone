@@ -1,0 +1,109 @@
+.tweet-box {
+  display: flex;
+  padding: 2%;
+  width: 1000px;
+  margin: 0 auto;
+  min-height: 70px; /* Add min-height to prevent it from becoming too small */
+
+  margin-bottom: 3%;
+  /* Rest of the CSS */
+}
+
+.profile-picture {
+  
+  height: 50px;
+  border-radius: 50%; /* Make the picture circular */
+  background-color: #ccc;
+  margin-right: 2%;
+}
+
+.tweet-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* This aligns the items vertically center */
+  margin-bottom: 3px;
+}
+
+.user-names {
+  display: contents;
+  align-items: center;
+}
+
+.username {
+  font-weight: bold;
+  margin-right: 2%;
+}
+
+.handle {
+  color: #999;
+}
+
+.time {
+  color: #999;
+  margin-right: 2%; /* Adjust this value to create spacing between the handle and time */
+}
+
+.tweet-text {
+  margin-bottom: 3px;
+  text-align: justify; 
+  text-justify: inter-word;
+}
+
+.tweet-icons {
+  display: flex;
+}
+
+.heart-icon,
+.cloud-icon,
+.retweet-icon {
+  margin-right: 2%; /* Adjust this value to change the spacing */
+  cursor: pointer;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  font-size: 16px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .tweet-box {
+    flex-direction: column;
+  }
+
+  .profile-picture {
+    
+    margin-bottom: 2%;
+  }
+
+  .tweet-content {
+    margin-top: 2%;
+  }
+
+  .username,
+  .handle,
+  .time {
+    margin-right: 0;
+  }
+
+  .heart-icon,
+  .cloud-icon,
+  .retweet-icon {
+    margin-right: 4%;
+  }
+}
+
+.user-names {
+    white-space: nowrap;
+  }
