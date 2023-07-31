@@ -1,48 +1,78 @@
-// import React, {useState} from "react";
+// import React from "react";
+// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 // import './App.css'
-// import { RiMenuLine, RiHomeLine, RiContactsLine, RiUserLine } from 'react-icons/ri';
-// import SignInPage from './Components/SignInPage'
+// import LoginPage from './Components/LoginPage'
+// import Navbar from './Components/Navbar';
+
+// const Home = () => {
+//   return (
+//     <div className="App">
+//       <h1>Welcome To HomePage!</h1>
+//     </div>
+//   );
+// };
+
+// const About = () => {
+//   return (
+//     <div className="App">
+//       <h1>Welcome To AboutPage!</h1>
+//     </div>
+//   );
+// };
+
+// const User = () => {
+//   return (
+//     <div className="App">
+//       <h1>Welcome To UserPage!</h1>
+//     </div>
+//   );
+// };
 
 // const App = () => {
-//   const [showSignInPage, setShowSignInPage] = useState(false)
+//   return (
+//     <Router>
+//       <div>
+//         <Navbar />
+//       </div>
 
-//   const handleSignIn = () => {
-//     setShowSignInPage(!showSignInPage)
-//   }
+//       <Routes>
+//         <Route path="/login" element={<LoginPage />}/>
+//       </Routes>
+//     </Router>
 
-//   return(
-//     <div className="App">
-//       {showSignInPage ? (
-//         <div>
-//           <button className="navbar-button" onClick={handleSignIn}>
-//             <span><RiMenuLine /></span>
-//           </button>
-//           <SignInPage />
-//         </div>
-//       ):(
-//         <div>
-//           <button className="navbar-button" onClick={handleSignIn}>
-//             <span><RiMenuLine /></span>
-//           </button>
+    // <Router>
+    //   <div>
+    //     <div>
+    //       <h1><Link to="/home">Home</Link></h1>
+    //       <h1><Link to="/about">About</Link></h1>
+    //       <h1><Link to="/contact">User</Link></h1>        
+    //     </div>
 
-//         </div>
-//       )}
-//     </div>
-//   )
+    //     <Routes>
+    //       <Route path="/home" element={<Home />} />
+    //       <Route path="/about" element={<About />} />
+    //       <Route path="/contact" element={<LoginPage />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
+//   );
 // };
 
 // export default App;
+
 
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Tweet from './Components/Tweet';
 import SearchBar from './Components/SearchBar';
-import SignInPage from './Components/SignInPage'; // Import the SignInPage component
+import LoginPage from './Components/LoginPage'; // Import the SignInPage component
 //Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, addDoc, getDocs } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'; // Import necessary components from React Router
+
 
 
 // Your web app's Firebase configuration
@@ -91,18 +121,23 @@ const App = () => {
   };
   
   // Function to handle user sign-in
-  const handleSignIn = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      setUser(user);
+// Function to handle user sign-in
+const handleSignIn = async () => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    setUser(user);
 
-      // Close the SignInPage and redirect to main page
-      setShowSignInPage(false);
-    } catch (error) {
-      console.error('Error signing in:', error);
-    }
-  };
+    // Set isExpanded to true to show the expanded navbar, including the "usericon" link
+    setIsExpanded(true);
+
+    // Close the SignInPage
+    setShowSignInPage(false);
+  } catch (error) {
+    console.error('Error signing in:', error);
+  }
+};
+
   
   // Function to handle user sign-out
   const handleSignOut = () => {
@@ -171,23 +206,53 @@ const App = () => {
     setIsExpanded(!isExpanded);
   };
 
-  return (
-    <div className="App">
-      {showSignInPage ? (
-        <SignInPage onSignIn={handleSignIn} onClose={() => setShowSignInPage(false)} />
-      ) : (
-        <>
-          <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
-          <SearchBar isExpanded={isExpanded} onAddTweet={addTweet} />
+  const HomePage = () => {
+    return(
+    <div className='App'>
+      <>
+        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
+        <SearchBar isExpanded={isExpanded} onAddTweet={addTweet} />
 
-          <div className="tweets-container">
-            {tweetsData.map((tweet) => {
-              return <Tweet key={tweet.tId} username={tweet.username} content={tweet.content} />;
-            })}
-          </div>
-        </>
-      )}
+        <div className="tweets-container">
+          {tweetsData.map((tweet) => {
+            return <Tweet key={tweet.tId} username={tweet.username} content={tweet.content} />;
+          })}
+        </div>
+      </>
     </div>
+    )
+  }
+
+  return (
+    <Router>
+      <div className='App'>
+        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </div>
+    </Router>
+    // <BrowserRouter>
+    //   <div className="App">
+    //     <>
+          // <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
+          // <SearchBar isExpanded={isExpanded} onAddTweet={addTweet} />
+
+          // <div className="tweets-container">
+          //   {tweetsData.map((tweet) => {
+          //     return <Tweet key={tweet.tId} username={tweet.username} content={tweet.content} />;
+          //   })}
+          // </div>
+    //     </>
+    //     <Routes>
+    //       <Route path="/" element={<></>} />
+    //       <Route path="/about" element={<div><h1>About Page</h1></div>} />
+    //       <Route path="/login" element={<LoginPage onSignIn={handleSignIn} onClose={() => setShowSignInPage(false)} />} />
+    //     </Routes>
+    //   </div>
+    // </BrowserRouter>
+    
   );
 };
 

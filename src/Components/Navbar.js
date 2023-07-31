@@ -1,8 +1,10 @@
 import React from 'react';
 import { RiMenuLine, RiHomeLine, RiContactsLine, RiUserLine } from 'react-icons/ri';
 import './Navbar.css'; // Import the CSS file for the component
+import { Link } from 'react-router-dom'; // Import Link component from React Router
 
 const Navbar = ({ isExpanded, onToggle, onSignIn }) => {
+
   return (
     <div className={isExpanded ? ('navbar') : ('navbar-folded')}>
       <button className="navbar-button" onClick={onToggle}>
@@ -10,29 +12,36 @@ const Navbar = ({ isExpanded, onToggle, onSignIn }) => {
       </button>
       {isExpanded ? (
         <>
-          <button className="navbar-button">
+          {/* Use Link components for navigation */}
+          <Link to="/" className="navbar-button" style={{ textDecoration: 'none' }}>
             <span><RiHomeLine /></span>
             Home
-          </button>
-          <button className="navbar-button">
+          </Link>
+
+          <Link to="/about" className="navbar-button" style={{ textDecoration: 'none' }} >
             <span><RiContactsLine /></span>
-            Contact
-          </button>
-          <button className="navbar-button" onClick={onSignIn}>
+            About
+          </Link>
+
+          <Link to="/login" className="navbar-button" style={{ textDecoration: 'none' }}>
             <span><RiUserLine /></span>
-          </button>
+          </Link>
         </>
       ) : (
         <>
-          <button className="navbar-button-folded">
+          <Link to="/" className="navbar-button-folded">
             <span><RiHomeLine /></span>
-          </button>
-          <button className="navbar-button-folded">
+            
+          </Link>
+
+          <Link to="/about" className="navbar-button-folded">
             <span><RiContactsLine /></span>
-          </button>
-          <button className="navbar-button-folded" onClick={onSignIn}>
+            
+          </Link>
+
+          <Link to="/login" className="navbar-button-folded">
             <span><RiUserLine /></span>
-          </button>
+          </Link>
         </>
       )}
     </div>
