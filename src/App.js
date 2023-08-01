@@ -1,31 +1,6 @@
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-// import './App.css'
-// import LoginPage from './Components/LoginPage'
-// import Navbar from './Components/Navbar';
-// import TweetBox from "./Components/TweetBox";
-
-// const App = () => {
-//   return (
-//     <div className="App">
-//       <TweetBox username={`MSTR2000`}content={`🔥Hot Take🔥
-
-// I love the standard Mail app in iOS. 
-
-// It’s simple, clean, and minimal. It works. 
-
-// I’m afraid to ask… but why do so many people hate it?`}/>
-//     </div>
-//   );
-// };
-
-// export default App;
-
-
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
-import Tweet from './Components/Tweet';
 import TweetBox from './Components/TweetBox';
 import SearchBar from './Components/SearchBar';
 import LoginPage from './Components/LoginPage'; // Import the SignInPage component
@@ -33,9 +8,8 @@ import LoginPage from './Components/LoginPage'; // Import the SignInPage compone
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, addDoc, getDocs, serverTimestamp  } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'; // Import necessary components from React Router
-
-
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, } from 'react-router-dom'; // Import necessary components from React Router
+import { useNavigate } from 'react-router-dom'; // Update the import to useNavigate
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -82,23 +56,33 @@ const App = () => {
     }
   };
   
+
   // Function to handle user sign-in
-// Function to handle user sign-in
-const handleSignIn = async () => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    setUser(user);
-
-    // Set isExpanded to true to show the expanded navbar, including the "usericon" link
-    setIsExpanded(true);
-
-    // Close the SignInPage
-    setShowSignInPage(false);
-  } catch (error) {
-    console.error('Error signing in:', error);
-  }
-};
+  const handleSignIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      setUser(user);
+  
+      // Set isExpanded to true to show the expanded navbar, including the "usericon" link
+      setIsExpanded(true);
+  
+      // Close the SignInPage
+      setShowSignInPage(false);
+  
+      // Get the user's display name (if available)
+      const displayName = user.displayName || 'User';
+  
+      // Prompt the user with a welcome message
+      alert(`Welcome, ${displayName} (${email})`);
+  
+      // Navigate to the homepage after successful login
+      // navigate('/'); // Use navigate function for redirection
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
+  
 
   
   // Function to handle user sign-out
@@ -172,14 +156,12 @@ const handleSignIn = async () => {
     return(
     <div className='App'>
       <>
-        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
+        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} />
         <SearchBar isExpanded={isExpanded} onAddTweet={addTweet} />
 
         <div className="tweets-container">
           {tweetsData.map((tweet) => {
-            const jsDate = (tweet.timestamp); // Convert the timestamp to a Date object
-            const timeAgo = calcTimeStamp(jsDate);
-            return <TweetBox key={tweet.tId} username={tweet.username} content={tweet.content} timeAgo={timeAgo} />;
+            return <TweetBox key={tweet.tId} username={tweet.username} content={tweet.content} timeAgo={`timeAgo`} />;
           })}
         </div>
 
@@ -187,40 +169,13 @@ const handleSignIn = async () => {
     </div>
     )
   }
-
-  const calcTimeStamp = (timestampString) => {
-    const timestamp = new Date(timestampString); // Convert the timestampString to a Date object
-    const now = new Date(); // Get the current Date object
-    const timeDifference = now - timestamp;
-  
-    
-    // Check for future timestamps
-    if (timeDifference < 0) {
-      return "In the future";
-    }
-    
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    
-    if (days > 0) {
-      return `${days} day${days === 1 ? '' : 's'} ago`;
-    } else if (hours > 0) {
-      return `${hours} h${hours === 1 ? '' : 's'} ago`;
-    } else if (minutes > 0) {
-      return `${minutes} min${minutes === 1 ? '' : 's'} ago`;
-    } else {
-      return `${seconds} s${seconds === 1 ? '' : 's'} ago`;
-    }
-  };
   
   return (
     <Router>
       <div className='App'>
-        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} onSignIn={() => setShowSignInPage(true)} />
+        <Navbar isExpanded={isExpanded} onToggle={toggleNavbar} />
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage onSignIn={handleSignIn} />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>

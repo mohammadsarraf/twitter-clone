@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUserCircle, FaHeart, FaCloud, FaRetweet, FaArrowDown, FaEllipsisH} from 'react-icons/fa';
+import { FaUserCircle, FaHeart, FaCloud, FaRetweet, FaArrowDown, FaEllipsisH, FaUser} from 'react-icons/fa';
 import './TweetBox.css'; // Import the CSS file for the component
 
 const TweetBox = ({username, content, timeAgo}) => {

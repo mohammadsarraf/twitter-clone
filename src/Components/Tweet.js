@@ -9,6 +9,7 @@ const Tweet = ({ username, content }) => {
   return (
     <div className="tweet">
       <div className="profile-picture">
+
         <FaUserCircle className="profile-icon" />
       </div>
       <div className="vertical-line"></div>

@@ -10,11 +10,14 @@
 }
 
 .profile-picture {
-  
+  width: 50px;
   height: 50px;
-  border-radius: 50%; /* Make the picture circular */
-  background-color: #ccc;
-  margin-right: 2%;
+  background-color: #ddd;
+  margin-right: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tweet-content {
@@ -56,6 +59,7 @@
 }
 
 .tweet-icons {
+  margin-top: 5%;
   display: flex;
 }
 
@@ -64,6 +68,18 @@
 .retweet-icon {
   margin-right: 2%; /* Adjust this value to change the spacing */
   cursor: pointer;
+}
+
+.heart-icon :hover{
+  color: red;
+}
+
+.cloud-icon :hover{
+  color: rgb(0, 34, 255);
+}
+
+.retweet-icon :hover{
+  color: rgb(0, 128, 43);
 }
 
 .dropdown-button {

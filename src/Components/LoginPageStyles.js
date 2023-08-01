@@ -1,4 +1,13 @@
 import styled from 'styled-components';
+import { FaPiedPiperAlt, FaUserAlt, FaLock  } from 'react-icons/fa';
+import { createGlobalStyle } from 'styled-components';
+
+export const Login = styled.div`
+  /* Apply the custom font to all elements */
+  body {
+    font-family: 'Playfair-Display';
+  }
+`;
 
 export const LoginPageContainer = styled.div`
   display: flex;
@@ -16,15 +25,19 @@ export const Card = styled.div`
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
   transform: scale(1.5);
   transform-origin: center;
 `;
 
 export const Logo = styled.div`
-  display: center;
-  max-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
+`;
+
+export const LogoIcon = styled(FaPiedPiperAlt)`
+  font-size: 48px; /* Increase this value to make the logo bigger */
 `;
 
 export const LoginForm = styled.form`
@@ -33,13 +46,19 @@ export const LoginForm = styled.form`
   align-items: center;
 `;
 
+export const Icon = styled(FaPiedPiperAlt)`
+  font-size: 24px;
+  margin-right: 10px; /* Add some spacing between the icon and input */
+`;
+
 export const FormInput = styled.input`
+  flex: 1; /* Fill the remaining width of the container */
   padding: 8px;
-  width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid transparent; /* Set the border to transparent */
   border-radius: 4px;
   outline: none;
-  margin-bottom: 10px;
+  background-color: transparent;
+  font-family: 'Playfair-Display';
 `;
 
 export const SubmitButton = styled.button`
@@ -53,7 +72,6 @@ export const SubmitButton = styled.button`
 `;
 
 export const Options = styled.div`
-
   color: white;
   margin-top: 15px;
 `;
@@ -129,4 +147,39 @@ export const TwitterCircle = styled.div`
   font-size: 18px;
   text-decoration: none;
   cursor: pointer;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  border-bottom: 1px solid;
+  width: 100%;
+  margin-bottom: 5%;
+  flex-direction: column;
+  align-items: flex-start; /* Change this to align items to the right */
+`;
+
+export const FormInputLabel = styled.label`
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-family: 'Playfair-Display';
+`;
+
+export const InputRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const IconWrapper = styled.div`
+  margin-right: 10px;
+`;
+
+export const IconUser = styled(FaUserAlt)`
+  font-size: 12px;
+  // margin-bottom: 10px;
+`;
+
+export const IconPass = styled(FaLock)`
+  font-size: 12px;
+  // margin-bottom: 10px;
 `;
