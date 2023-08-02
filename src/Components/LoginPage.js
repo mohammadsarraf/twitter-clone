@@ -7,7 +7,8 @@ import {
   Logo,
   LoginForm,
   Icon,
-  InputContainer,
+  InputContainerUsername,
+  InputContainerPassword,
   FormInput,
   FormInputLabel,
   InputRow,
@@ -49,7 +50,8 @@ const LoginPage = ({ onSignIn }) => {
           <LogoIcon />
         </Logo>
         <LoginForm onSubmit={handleSubmit}>
-        <InputContainer className='Username-input'>
+          
+          <InputContainerUsername>
             <FormInputLabel>Username</FormInputLabel>
             <InputRow>
               <IconUser />
@@ -61,29 +63,29 @@ const LoginPage = ({ onSignIn }) => {
                 required
               />
             </InputRow>
-          </InputContainer>
-          <InputContainer className='Password-input'>
+          </InputContainerUsername>
+          <InputContainerPassword>
             <FormInputLabel>Password</FormInputLabel>
             <InputRow>
               <IconPass />
               <FormInput
-                type="text"
+                type="password" // Corrected the type to 'password'
                 placeholder="Type your Password"
                 value={password}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)} // Corrected the state to 'password'
                 required
               />
             </InputRow>
-          </InputContainer>
+          </InputContainerPassword>
+
+          <Options>
+            <OptionsLink href="#">Forgot Password?</OptionsLink>
+          </Options>
 
           <SubmitButton type="submit">Login</SubmitButton>
+
         </LoginForm>
-        <Options>
-          <p>
-            <OptionsLink href="#">Forgot password?</OptionsLink> |{' '}
-            <OptionsLink href="#">New user? Register</OptionsLink>
-          </p>
-        </Options>
+
         <OrLine>
           <OrLineHr />
           <OrLineText>or login with:</OrLineText>

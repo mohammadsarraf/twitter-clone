@@ -44,6 +44,7 @@ export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 export const Icon = styled(FaPiedPiperAlt)`
@@ -54,6 +55,7 @@ export const Icon = styled(FaPiedPiperAlt)`
 export const FormInput = styled.input`
   flex: 1; /* Fill the remaining width of the container */
   padding: 8px;
+  color: white;
   border: 1px solid transparent; /* Set the border to transparent */
   border-radius: 4px;
   outline: none;
@@ -63,7 +65,8 @@ export const FormInput = styled.input`
 
 export const SubmitButton = styled.button`
   padding: 10px 20px;
-  background-color: #007bff;
+  width: 200px; /* Add your desired width */
+  background: linear-gradient(45deg, #007bff, #f51a0a); /* Replace #00ff00 with your desired second color */
   color: white;
   border: none;
   border-radius: 4px;
@@ -73,13 +76,17 @@ export const SubmitButton = styled.button`
 
 export const Options = styled.div`
   color: white;
-  margin-top: 15px;
+  margin-top: 0px;
+  text-align: right; /* Align text to the right */
+  width: 100%; /* Ensure full width */
+  margin-bottom: 5%;
 `;
 
 export const OptionsLink = styled.a`
-  font-size: 12px;
+  font-size: 60%;
   color: #007bff;
   text-decoration: none;
+  // margin-bottom: 0px;
 `;
 
 export const OrLine = styled.div`
@@ -149,7 +156,17 @@ export const TwitterCircle = styled.div`
   cursor: pointer;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainerUsername = styled.div`
+  display: flex;
+  // font-color: white;
+  border-bottom: 1px solid;
+  width: 100%;
+  margin-bottom: 5%;
+  flex-direction: column;
+  align-items: flex-start; /* Change this to align items to the right */
+`;
+
+export const InputContainerPassword = styled.div`
   display: flex;
   border-bottom: 1px solid;
   width: 100%;
